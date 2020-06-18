@@ -1,0 +1,5 @@
+<ul>
+	<% @book.errors.full_messages.each do |message| %>
+	<li>error!:<%= message %></li>
+	<% end %>
+</ul>

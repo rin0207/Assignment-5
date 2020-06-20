@@ -30,7 +30,6 @@ before_action :authenticate_user!
   end
 
 
-
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)

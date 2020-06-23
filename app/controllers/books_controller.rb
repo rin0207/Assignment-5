@@ -4,12 +4,14 @@ before_action :authenticate_user!
   def show
     @book = Book.find(params[:id])
     @user = @book.user
+    @book_comment = BookComment.new
   end
 
   def index
     @books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
     @book = Book.new
     @user = current_user
+    
   end
 
   def create
@@ -39,7 +41,7 @@ before_action :authenticate_user!
     end
   end
 
-  def delete
+  def destroy
     @book = Book.find(params[:id])
     @book.destoy
     redirect_to books_path, notice: "successfully delete book!"

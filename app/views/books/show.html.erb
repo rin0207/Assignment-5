@@ -32,11 +32,13 @@
 					<td><%= link_to "Destroy",@book, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
 					<% end %>
 
+					<td><%= @book.book_comments.count %>件コメント</td>
+
 					<% if @book.favorited_by?(current_user) %>
 					<td>
 						<%= link_to book_favorites_path(@book), method: :delete do %>
 						<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-						<%= @book.favorites.ccount %>
+						<%= @book.favorites.count %>
 						<% end %>
 					</td>
 					<% else %>
@@ -48,7 +50,30 @@
 					</td>
 					<% end %>
 				</tr>
+				
+					<% @book.book_comments.each do |book_comment| %>
+					<tr>
+					<td><%= attachment_image_tag(book_comment.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %></td>
+					<td><%= book_comment.user.name %></td>
+					<td><%= book_comment.comment %></td>
+
+					<% if book_comment.user.id == current_user.id %>
+					<td><%= link_to "Destroy",book_book_comment_path(book_comment.book, book_comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_comment_#{book_comment.id}" %></td>
+					<% end %>
+                    </tr>
+					<% end %>
+
+
+				
 			</table>
+			        <%= form_for [@book, @book_comment] do |f| %>
+					    <div class="">
+                           <div class="">
+                                 <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+                            </div>
+                        </div>
+                        <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+                    <% end %>
 
 	</div>
 </div>

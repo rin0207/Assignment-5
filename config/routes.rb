@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'home/about' => 'homes#about'
   get 'relationship/follow' => 'relationships#follow'
   get 'relationship/follower' => 'relationships#follower'
+  get 'search' => 'searches#search'
   delete 'books/:id' => 'books#destroy', as: 'destroy_book'
 
 end

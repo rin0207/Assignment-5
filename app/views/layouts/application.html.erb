@@ -36,8 +36,20 @@
           </ul>
         </nav>
 
+
       </div>
     </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-9">
+        <% if user_signed_in? %>
+        <%= render 'searches/search' %>
+        <% else %>
+        <% end %>
+        </div>
+      </div>
+    </div>
     <!--ヘッダーの記述-->
     <div class="container">
       <% flash.each do |key, value| %>
